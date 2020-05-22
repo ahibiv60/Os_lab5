@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://172.19.0.2:3306/nikulshyn_db?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
+    url: jdbc:mysql://172.19.0.2:3306/rak_db?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: lfybkjshf
     driver-class-name: com.mysql.cj.jdbc.Driver

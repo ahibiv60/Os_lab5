@@ -1,9 +1,9 @@
 -- -----------------------------------------------------
--- Schema nikulshyn_db
+-- Schema rak_db
 -- -----------------------------------------------------
-DROP DATABASE IF EXISTS `nikulshyn_db`;
-CREATE DATABASE `nikulshyn_db` ;
-USE `nikulshyn_db` ;
+DROP DATABASE IF EXISTS `rak_db`;
+CREATE DATABASE `rak_db` ;
+USE `rak_db` ;
 
 DROP TABLE IF EXISTS `country`;
 DROP TABLE IF EXISTS `transaction`;
@@ -21,9 +21,9 @@ DROP TABLE IF EXISTS `business`;
 DROP TABLE IF EXISTS `service`;
 DROP TABLE IF EXISTS `bank`;
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`country`
+-- Table `rak_db`.`country`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`country` (
+CREATE TABLE `rak_db`.`country` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `tax` INT NOT NULL,
@@ -34,9 +34,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`customer`
+-- Table `rak_db`.`customer`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`customer` (
+CREATE TABLE `rak_db`.`customer` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `surname` VARCHAR(45) NOT NULL,
@@ -48,16 +48,16 @@ CREATE TABLE `nikulshyn_db`.`customer` (
   INDEX `fk_customer_country1_idx` (`country_id` ASC),
   CONSTRAINT `fk_customer_country1`
     FOREIGN KEY (`country_id`)
-    REFERENCES `nikulshyn_db`.`country` (`id`)
+    REFERENCES `rak_db`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`transaction`
+-- Table `rak_db`.`transaction`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`transaction` (
+CREATE TABLE `rak_db`.`transaction` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `transaction_info` VARCHAR(45) NULL,
   `amount` DECIMAL(45) NOT NULL,
@@ -71,9 +71,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`currency`
+-- Table `rak_db`.`currency`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`currency` (
+CREATE TABLE `rak_db`.`currency` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `transaction_id` INT NOT NULL,
@@ -81,16 +81,16 @@ CREATE TABLE `nikulshyn_db`.`currency` (
   INDEX `fk_currency_transaction1_idx` (`transaction_id` ASC),
   CONSTRAINT `fk_currency_transaction1`
     FOREIGN KEY (`transaction_id`)
-    REFERENCES `nikulshyn_db`.`transaction` (`id`)
+    REFERENCES `rak_db`.`transaction` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`private_account`
+-- Table `rak_db`.`private_account`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`private_account` (
+CREATE TABLE `rak_db`.`private_account` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `account_number` BIGINT NOT NULL,
   `account_balance` DECIMAL NOT NULL,
@@ -105,26 +105,26 @@ CREATE TABLE `nikulshyn_db`.`private_account` (
   INDEX `fk_private_account_currency1_idx` (`currency_id` ASC),
   CONSTRAINT `fk_private_account_currency1`
     FOREIGN KEY (`currency_id`)
-    REFERENCES `nikulshyn_db`.`currency` (`id`)
+    REFERENCES `rak_db`.`currency` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_private_account_customer1`
     FOREIGN KEY (`customer_id`)
-    REFERENCES `nikulshyn_db`.`customer` (`id`)
+    REFERENCES `rak_db`.`customer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_private_account_transaction1`
     FOREIGN KEY (`transaction_id`)
-    REFERENCES `nikulshyn_db`.`transaction` (`id`)
+    REFERENCES `rak_db`.`transaction` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`business`
+-- Table `rak_db`.`business`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`business` (
+CREATE TABLE `rak_db`.`business` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `service` VARCHAR(45) NOT NULL,
@@ -135,9 +135,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`business_account`
+-- Table `rak_db`.`business_account`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`business_account` (
+CREATE TABLE `rak_db`.`business_account` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `owner_company` VARCHAR(45) NOT NULL,
   `balance` DECIMAL NULL,
@@ -149,21 +149,21 @@ CREATE TABLE `nikulshyn_db`.`business_account` (
   INDEX `fk_business_account_transaction1_idx` (`transaction_id` ASC),
   CONSTRAINT `fk_business_account_business1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `nikulshyn_db`.`business` (`id`)
+    REFERENCES `rak_db`.`business` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_business_account_transaction1`
     FOREIGN KEY (`transaction_id`)
-    REFERENCES `nikulshyn_db`.`transaction` (`id`)
+    REFERENCES `rak_db`.`transaction` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`service`
+-- Table `rak_db`.`service`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`service` (
+CREATE TABLE `rak_db`.`service` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `price` DECIMAL NOT NULL,
@@ -173,16 +173,16 @@ CREATE TABLE `nikulshyn_db`.`service` (
   INDEX `fk_service_business1_idx` (`business_id` ASC),
   CONSTRAINT `fk_service_business1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `nikulshyn_db`.`business` (`id`)
+    REFERENCES `rak_db`.`business` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`product`
+-- Table `rak_db`.`product`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`product` (
+CREATE TABLE `rak_db`.`product` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `price` DECIMAL NOT NULL,
@@ -192,16 +192,16 @@ CREATE TABLE `nikulshyn_db`.`product` (
   INDEX `fk_product_business1_idx` (`business_id` ASC),
   CONSTRAINT `fk_product_business1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `nikulshyn_db`.`business` (`id`)
+    REFERENCES `rak_db`.`business` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`bank`
+-- Table `rak_db`.`bank`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`bank` (
+CREATE TABLE `rak_db`.`bank` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `country_id` INT NOT NULL,
@@ -209,32 +209,32 @@ CREATE TABLE `nikulshyn_db`.`bank` (
   INDEX `fk_bank_country1_idx` (`country_id` ASC),
   CONSTRAINT `fk_bank_country1`
     FOREIGN KEY (`country_id`)
-    REFERENCES `nikulshyn_db`.`country` (`id`)
+    REFERENCES `rak_db`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`customer_password`
+-- Table `rak_db`.`customer_password`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`customer_password` (
+CREATE TABLE `rak_db`.`customer_password` (
   `customer_id` INT NOT NULL AUTO_INCREMENT,
   `customer_password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`customer_id`),
   INDEX `fk_passwords_customer1_idx` (`customer_id` ASC),
   CONSTRAINT `fk_passwords_customer1`
     FOREIGN KEY (`customer_id`)
-    REFERENCES `nikulshyn_db`.`customer` (`id`)
+    REFERENCES `rak_db`.`customer` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`country_has_currency`
+-- Table `rak_db`.`country_has_currency`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`country_has_currency` (
+CREATE TABLE `rak_db`.`country_has_currency` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `country_id` INT NOT NULL,
   `currency_id` INT NOT NULL,
@@ -243,37 +243,37 @@ CREATE TABLE `nikulshyn_db`.`country_has_currency` (
   INDEX `fk_country_has_currency_country1_idx` (`country_id` ASC),
   CONSTRAINT `fk_country_has_currency_country1`
     FOREIGN KEY (`country_id`)
-    REFERENCES `nikulshyn_db`.`country` (`id`)
+    REFERENCES `rak_db`.`country` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_country_has_currency_currency1`
     FOREIGN KEY (`currency_id`)
-    REFERENCES `nikulshyn_db`.`currency` (`id`)
+    REFERENCES `rak_db`.`currency` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`business_password`
+-- Table `rak_db`.`business_password`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`business_password` (
+CREATE TABLE `rak_db`.`business_password` (
   `business_id` INT NOT NULL AUTO_INCREMENT,
   `business_password` VARCHAR(45) NULL,
   PRIMARY KEY (`business_id`),
   INDEX `fk_business_password_business1_idx` (`business_id` ASC),
   CONSTRAINT `fk_business_password_business1`
     FOREIGN KEY (`business_id`)
-    REFERENCES `nikulshyn_db`.`business` (`id`)
+    REFERENCES `rak_db`.`business` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`bank_password`
+-- Table `rak_db`.`bank_password`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`bank_password` (
+CREATE TABLE `rak_db`.`bank_password` (
   `bank_id` INT NOT NULL AUTO_INCREMENT,
   `bank_password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`bank_id`),
@@ -281,16 +281,16 @@ CREATE TABLE `nikulshyn_db`.`bank_password` (
   UNIQUE INDEX `bank_password_UNIQUE` (`bank_password` ASC),
   CONSTRAINT `fk_bank_password_bank1`
     FOREIGN KEY (`bank_id`)
-    REFERENCES `nikulshyn_db`.`bank` (`id`)
+    REFERENCES `rak_db`.`bank` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `nikulshyn_db`.`bank_has_transaction`
+-- Table `rak_db`.`bank_has_transaction`
 -- -----------------------------------------------------
-CREATE TABLE `nikulshyn_db`.`bank_has_transaction` (
+CREATE TABLE `rak_db`.`bank_has_transaction` (
   `id` VARCHAR(45) NOT NULL,
   `bank_id` INT NOT NULL AUTO_INCREMENT,
   `transaction_id` INT NOT NULL,
@@ -299,12 +299,12 @@ CREATE TABLE `nikulshyn_db`.`bank_has_transaction` (
   INDEX `fk_bank_has_transaction_bank1_idx` (`bank_id` ASC),
   CONSTRAINT `fk_bank_has_transaction_bank1`
     FOREIGN KEY (`bank_id`)
-    REFERENCES `nikulshyn_db`.`bank` (`id`)
+    REFERENCES `rak_db`.`bank` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_bank_has_transaction_transaction1`
     FOREIGN KEY (`transaction_id`)
-    REFERENCES `nikulshyn_db`.`transaction` (`id`)
+    REFERENCES `rak_db`.`transaction` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;

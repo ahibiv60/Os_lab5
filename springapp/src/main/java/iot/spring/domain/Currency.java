@@ -3,7 +3,7 @@ package iot.spring.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "currency", schema = "nikulshyn_db")
+@Table(name = "currency", schema = "rak_db")
 public class Currency {
 
     @Id
