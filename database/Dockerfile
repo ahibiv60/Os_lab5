@@ -1,6 +1,6 @@
 FROM mariadb
-MAINTAINER Rak Bogdan
-ENV MYSQL_DATABASE=rak_db \
+MAINTAINER Nikulshyn Danylo
+ENV MYSQL_DATABASE=nikulshyn_db \
     MYSQL_ROOT_PASSWORD=lfybkjshf
 ADD script.sql /docker-entrypoint-initdb.d
 EXPOSE 3306

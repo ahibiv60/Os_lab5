@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/rak_db")
+@RequestMapping("/nikulshyn_db")
 public class TransactionController {
     @Autowired
     TransactionService transactionService;

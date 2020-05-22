@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 @Entity
-@Table(name = "private_account", schema = "rak_db")
+@Table(name = "private_account", schema = "nikulshyn_db")
 public class PrivateAccount {
 
     @Id

@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "business_account", schema = "rak_db")
+@Table(name = "business_account", schema = "nikulshyn_db")
 public class BusinessAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

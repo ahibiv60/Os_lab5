@@ -25,7 +25,7 @@ public class SwaggerConfiguration {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("iot.spring"))
-                .paths(regex("/rak_db.*"))
+                .paths(regex("/nikulshyn_db.*"))
                 .build()
                 .apiInfo(apiInfo());
     }

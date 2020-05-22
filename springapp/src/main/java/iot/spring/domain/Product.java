@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "product", schema = "rak_db")
+@Table(name = "product", schema = "nikulshyn_db")
 public class Product {
 
     @Id

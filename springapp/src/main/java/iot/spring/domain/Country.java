@@ -4,7 +4,7 @@ package iot.spring.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "country", schema = "rak_db")
+@Table(name = "country", schema = "nikulshyn_db")
 public class Country {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
